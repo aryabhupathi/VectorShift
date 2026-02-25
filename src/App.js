@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { PipelineToolbar } from "./toolbar";
+import { PipelineUI } from "./ui";
+import { SubmitButton } from "./submit";
+import "./styles.css";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    // <div>
+    //   <PipelineToolbar />
+    //   <PipelineUI />
+    //   <SubmitButton />
+    // </div>
+
+    <div className="app-container">
+      <header className="top-bar">
+        <PipelineToolbar />
       </header>
+
+      <main className="canvas-container">
+        <PipelineUI />
+      </main>
+
+      <footer className="bottom-bar">
+        <SubmitButton />
+      </footer>
     </div>
   );
 }
-
 export default App;
