@@ -1,11 +1,10 @@
-// toolbar.js
 import { DraggableNode } from "./draggableNode";
 export const PipelineToolbar = () => {
   return (
     <div style={{ padding: "10px" }}>
       <div
         style={{
-          marginTop: "20px",
+          marginTop: "10px",
           display: "flex",
           flexWrap: "wrap",
           gap: "10px",

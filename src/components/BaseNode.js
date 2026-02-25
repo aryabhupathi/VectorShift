@@ -1,43 +1,4 @@
-// import { Handle, Position } from "reactflow";
-
-// export const BaseNode = ({
-//   id,
-//   title,
-//   inputs = [],
-//   outputs = [],
-//   children,
-// }) => {
-//   return (
-//     <div className="node-container">
-//       <div className="node-header">{title}</div>
-
-//       {inputs.map((input, index) => (
-//         <Handle
-//           key={input}
-//           type="target"
-//           position={Position.Left}
-//           id={`${id}-${input}`}
-//           style={{ top: 50 + index * 22 }}
-//         />
-//       ))}
-
-//       {outputs.map((output, index) => (
-//         <Handle
-//           key={output}
-//           type="source"
-//           position={Position.Right}
-//           id={`${id}-${output}`}
-//           style={{ top: 50 + index * 22 }}
-//         />
-//       ))}
-
-//       <div className="node-body">{children}</div>
-//     </div>
-//   );
-// };
-
 import { Handle, Position } from "reactflow";
-
 export const BaseNode = ({
   id,
   title,
@@ -45,67 +6,47 @@ export const BaseNode = ({
   outputs = [],
   children,
   selected,
+  style = {},
 }) => {
   return (
     <div
+      style={style}
       className={`
         relative
-        bg-card
-        border border-border
+        bg-white
+        border border-slate-200
         rounded-2xl
-        shadow-node
-        px-4 py-3
-        min-w-[220px]
-        transition-all duration-200
-        hover:shadow-nodeHover
-        ${selected ? "ring-2 ring-accent border-accent" : ""}
+        shadow-md
+        px-4 py-4
+        min-w-[240px]
+        transition-all duration-200 ease-out
+        hover:-translate-y-1
+        hover:shadow-lg
+        ${selected ? "ring-2 ring-indigo-500 border-indigo-500 shadow-lg" : ""}
       `}
     >
-      {/* Header */}
-      <div className="text-sm font-semibold mb-3 text-slate-700">{title}</div>
-
-      {/* Input Handles */}
-      {inputs.map((input, index) => (
+      <div className="text-sm font-semibold text-slate-800 text-center mb-3">
+        {title}
+      </div>
+      {inputs.map((input) => (
         <Handle
           key={input}
           type="target"
           position={Position.Left}
           id={`${id}-${input}`}
-          style={{ top: 60 + index * 24 }}
-          className="
-            w-3 h-3
-            bg-accent
-            border-2 border-white
-            rounded-full
-            shadow
-            hover:scale-110
-            transition-transform
-          "
+          className="w-3.5 h-3.5 bg-indigo-500 border-2 border-white rounded-full shadow-sm"
         />
       ))}
-
-      {/* Output Handles */}
-      {outputs.map((output, index) => (
+      {outputs.map((output) => (
         <Handle
           key={output}
           type="source"
           position={Position.Right}
           id={`${id}-${output}`}
-          style={{ top: 60 + index * 24 }}
-          className="
-            w-3 h-3
-            bg-accent
-            border-2 border-white
-            rounded-full
-            shadow
-            hover:scale-110
-            transition-transform
-          "
+          className="w-3.5 h-3.5 bg-indigo-500 border-2 border-white rounded-full shadow-sm"
         />
       ))}
-
-      {/* Body */}
-      <div className="text-sm text-slate-600">{children}</div>
+      <div className="text-xs text-slate-600 mt-2 space-y-2">{children}</div>
     </div>
   );
 };

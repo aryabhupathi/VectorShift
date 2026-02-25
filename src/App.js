@@ -4,21 +4,13 @@ import { SubmitButton } from "./submit";
 import "./styles.css";
 function App() {
   return (
-    // <div>
-    //   <PipelineToolbar />
-    //   <PipelineUI />
-    //   <SubmitButton />
-    // </div>
-
     <div className="app-container">
       <header className="top-bar">
         <PipelineToolbar />
       </header>
-
       <main className="canvas-container">
         <PipelineUI />
       </main>
-
       <footer className="bottom-bar">
         <SubmitButton />
       </footer>

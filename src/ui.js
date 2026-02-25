@@ -10,7 +10,7 @@ import { MathNode } from "./nodes/mathNode";
 import { FilterNode } from "./nodes/filterNode";
 import { JSONNode } from "./nodes/JSONNode";
 import { DelayNode } from "./nodes/delayNode";
-import { ConditionNode } from "./nodes/consitionNode";
+import { ConditionNode } from "./nodes/conditionsNode";
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
 const nodeTypes = {
@@ -22,7 +22,7 @@ const nodeTypes = {
   filter: FilterNode,
   json: JSONNode,
   delay: DelayNode,
-  condition: ConditionNode,
+  condition: ConditionNode
 };
 export const PipelineUI = () => {
   const reactFlowWrapper = useRef(null);

@@ -1,7 +1,4 @@
-// jsonNode.js
-
 import { BaseNode } from "../components/BaseNode";
-
 export const JSONNode = ({ id }) => {
   return (
     <BaseNode
