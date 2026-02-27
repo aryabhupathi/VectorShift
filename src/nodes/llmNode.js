@@ -9,6 +9,7 @@ export const LLMNode = ({ id, selected }) => {
       title="LLM"
       inputs={["system", "prompt"]}
       outputs={["response"]}
+      selected={selected}
     >
       <NodeInput
         label="Model"
