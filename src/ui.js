@@ -22,7 +22,7 @@ const nodeTypes = {
   filter: FilterNode,
   json: JSONNode,
   delay: DelayNode,
-  condition: ConditionNode
+  condition: ConditionNode,
 };
 export const PipelineUI = () => {
   const reactFlowWrapper = useRef(null);
@@ -72,7 +72,7 @@ export const PipelineUI = () => {
   }, []);
   return (
     <>
-      <div ref={reactFlowWrapper} style={{ width: "100wv", height: "70vh" }}>
+      <div ref={reactFlowWrapper} style={{ width: "100wv", height: "100%" }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -89,7 +89,11 @@ export const PipelineUI = () => {
         >
           <Background color="#aaa" gap={gridSize} />
           <Controls />
-          <MiniMap />
+          {/* <MiniMap /> */}
+          <MiniMap
+            nodeColor={() => "#fef2f2"}
+            maskColor="rgba(15, 23, 42, 0.1)"
+          />
         </ReactFlow>
       </div>
     </>

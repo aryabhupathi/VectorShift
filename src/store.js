@@ -62,4 +62,9 @@ export const useStore = create((set, get) => ({
       ),
     });
   },
+  deleteNode: (id) =>
+    set((state) => ({
+      nodes: state.nodes.filter((n) => n.id !== id),
+      edges: state.edges.filter((e) => e.source !== id && e.target !== id),
+    })),
 }));

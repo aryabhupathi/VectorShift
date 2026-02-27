@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { BaseNode } from "../components/BaseNode";
-export const LLMNode = ({ id }) => {
+import { NodeInput } from "../components/NodeInput";
+export const LLMNode = ({ id, selected }) => {
+  const [model, setModel] = useState("gpt-4");
   return (
     <BaseNode
       id={id}
@@ -7,15 +10,16 @@ export const LLMNode = ({ id }) => {
       inputs={["system", "prompt"]}
       outputs={["response"]}
     >
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        <label style={{ fontSize: 12 }}>
-          Model:
-          <select style={{ width: "100%" }}>
-            <option>gpt-4</option>
-            <option>gpt-3.5-turbo</option>
-          </select>
-        </label>
-      </div>
+      <NodeInput
+        label="Model"
+        type="select"
+        value={model}
+        onChange={(e) => setModel(e.target.value)}
+        options={[
+          { label: "GPT-4", value: "gpt-4" },
+          { label: "GPT-3.5 Turbo", value: "gpt-3.5-turbo" },
+        ]}
+      />
     </BaseNode>
   );
 };

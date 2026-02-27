@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { BaseNode } from "../components/BaseNode";
+import { NodeInput } from "../components/NodeInput";
 import { useStore } from "../store";
-export const InputNode = ({ id, data }) => {
+export const InputNode = ({ id, data, selected }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
   const [currName, setCurrName] = useState(
     data?.inputName || id.replace("customInput-", "input_"),
@@ -14,28 +15,24 @@ export const InputNode = ({ id, data }) => {
     updateNodeField(id, "inputType", inputType);
   }, [inputType, id, updateNodeField]);
   return (
-    <BaseNode id={id} title="Input" outputs={["value"]}>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <label style={{ fontSize: 12 }}>
-          Name:
-          <input
-            type="text"
-            value={currName}
-            onChange={(e) => setCurrName(e.target.value)}
-            style={{ width: "100%" }}
-          />
-        </label>
-        <label style={{ fontSize: 12 }}>
-          Type:
-          <select
-            value={inputType}
-            onChange={(e) => setInputType(e.target.value)}
-            style={{ width: "100%" }}
-          >
-            <option value="Text">Text</option>
-            <option value="File">File</option>
-          </select>
-        </label>
+    <BaseNode id={id} title="Input" outputs={["value"]} selected={selected}>
+      <div className="flex flex-col gap-4">
+        <NodeInput
+          label="Name"
+          value={currName}
+          onChange={(e) => setCurrName(e.target.value)}
+          placeholder="Enter input name"
+        />
+        <NodeInput
+          label="Type"
+          type="select"
+          value={inputType}
+          onChange={(e) => setInputType(e.target.value)}
+          options={[
+            { label: "Text", value: "Text" },
+            { label: "File", value: "File" },
+          ]}
+        />
       </div>
     </BaseNode>
   );

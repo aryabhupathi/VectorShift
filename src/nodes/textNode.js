@@ -7,7 +7,7 @@ export const TextNode = ({ id, data, selected }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
   const updateNodeInternals = useUpdateNodeInternals();
   const [text, setText] = useState(data?.text ?? "");
-  const [width, setWidth] = useState(220);
+  const [width, setWidth] = useState(240);
   const textareaRef = useRef(null);
   const measureRef = useRef(null);
   const variables = useMemo(() => {
@@ -21,7 +21,7 @@ export const TextNode = ({ id, data, selected }) => {
     if (!textarea || !mirror) return;
     textarea.style.height = "auto";
     textarea.style.height = `${textarea.scrollHeight}px`;
-    const newWidth = Math.min(500, Math.max(220, mirror.scrollWidth + 32));
+    const newWidth = Math.min(520, Math.max(240, mirror.scrollWidth + 40));
     setWidth(newWidth);
   }, [text]);
   useEffect(() => {
@@ -33,7 +33,7 @@ export const TextNode = ({ id, data, selected }) => {
   const highlight = (value) =>
     value.replace(
       VARIABLE_REGEX,
-      '<span class="text-indigo-600 font-semibold">$&</span>',
+      `<span class="bg-indigo-100 text-indigo-700 px-1 rounded font-medium">$&</span>`,
     );
   return (
     <BaseNode
@@ -44,24 +44,60 @@ export const TextNode = ({ id, data, selected }) => {
       selected={selected}
       style={{ width }}
     >
-      <div className="relative w-full">
+      <div className="relative w-full group">
         <div
           ref={measureRef}
-          className="absolute invisible whitespace-pre text-sm p-2"
+          className="absolute invisible whitespace-pre text-sm px-3 py-2"
         >
           {text || " "}
         </div>
         <div
-          className="absolute inset-0 pointer-events-none whitespace-pre-wrap break-words text-sm p-2"
-          dangerouslySetInnerHTML={{ __html: highlight(text) }}
-        />
-        <textarea
-          ref={textareaRef}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Enter text or use {{variable}}"
-          className="relative w-full bg-transparent text-transparent caret-black resize-none overflow-hidden text-sm p-2"
-        />
+          className={`
+            relative
+            rounded-xl
+            border
+            bg-slate-50/70
+            backdrop-blur-sm
+            transition-all
+            duration-200
+            ${
+              selected
+                ? "border-indigo-400 ring-2 ring-indigo-500/20"
+                : "border-slate-200 group-hover:border-slate-300"
+            }
+          `}
+        >
+          <div
+            className="absolute inset-0 pointer-events-none whitespace-pre-wrap break-words text-sm px-3 py-2 text-slate-800"
+            dangerouslySetInnerHTML={{
+              __html: highlight(text || ""),
+            }}
+          />
+          <textarea
+            ref={textareaRef}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Enter text or use {{variable}}"
+            className="
+              relative
+              w-full
+              bg-transparent
+              text-transparent
+              caret-slate-800
+              resize-none
+              overflow-hidden
+              text-sm
+              px-3
+              py-2
+              outline-none
+            "
+          />
+        </div>
+        <div className="mt-2 text-xs text-slate-400">
+          Use{" "}
+          <span className="font-mono text-indigo-500">{"{{variable}}"}</span>{" "}
+          syntax to inject values
+        </div>
       </div>
     </BaseNode>
   );
